@@ -1,0 +1,3 @@
+Created .mot file | 2025-04-11 | demo_writeheader --content demo_appliance --id 1006 --major 1 --minor 0 --revision 1
+Created .mot file | 2025-04-11 | demo_writeheader --content demo_appliance --id 1008 --major 2 --minor 0 --revision 0
+Created .mot file | 2025-04-11 | demo_writeheader --content demo_appliance --id 1003 --major 5 --minor 1 --revision 1
