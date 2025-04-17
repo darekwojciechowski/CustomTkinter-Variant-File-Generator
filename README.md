@@ -21,6 +21,10 @@ GUI application designed to facilitate the generation of variant files. Built us
 - Python 3.x
 - [CustomTkinter library](https://github.com/TomSchimansky/CustomTkinter)
 
+## Important Note
+
+To execute the `.mot` file via the generated executable, ensure that the `demo_writeheader.bat` file is located in the same directory as the executable. This batch file is necessary for processing and generating the `.mot` file correctly.
+
 ## Usage
 
 - Launch the application and use the "Open EEP file" button to select your EEP file.
