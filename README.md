@@ -1,8 +1,11 @@
-# CustomTkinter-Variant-File-Generator
+# CustomTkinter Variant File Generator
 
 ## Overview
 
-CustomTkinter-Variant-File-Generator is a graphical user interface (GUI) application designed to facilitate the generation of variant files. Built using the CustomTkinter library, this application allows users to select EEP files, specify variant details, and generate corresponding .MOT files with ease.
+GUI application designed to facilitate the generation of variant files. Built using the CustomTkinter library, this application allows users to select EEP files, specify variant details, and generate corresponding .MOT files with ease.
+
+## Demo
+![Dashboard Demo](assets/demo.gif)
 
 ## Features
 
@@ -12,12 +15,11 @@ CustomTkinter-Variant-File-Generator is a graphical user interface (GUI) applica
 - **Automated File Generation**: Executes batch commands to generate .MOT files based on user inputs.
 - **Change Logging**: Maintains a ChangeLog.txt file to track all generated files and commands executed.
 - **Error Handling**: Provides clear error messages and feedback to users.
-- **Cross-Platform Compatibility**: Designed to work seamlessly on Windows systems.
 
 ### Prerequisites
 
 - Python 3.x
-- CustomTkinter library
+- [CustomTkinter library](https://github.com/TomSchimansky/CustomTkinter)
 
 ## Usage
 
