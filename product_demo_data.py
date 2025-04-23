@@ -16,5 +16,4 @@ id_map = {
     "Window Automation Controller": 1008
 }
 
-
 product_names = list(id_map.keys())  # List of product names
