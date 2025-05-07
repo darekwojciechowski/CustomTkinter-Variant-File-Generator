@@ -31,7 +31,3 @@ To execute the `.mot` file via the generated executable, ensure that the `demo_w
 - Choose a variant from the dropdown menu and specify the major, minor, and revision numbers.
 - Click "Generate Results" to create the .MOT file.
 - View the generated file by clicking "Open created file" once the process is complete.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
