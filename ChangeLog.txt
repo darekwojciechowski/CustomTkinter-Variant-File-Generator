@@ -1,0 +1,5 @@
+# ChangeLog
+# Format: Created .mot file:: DATE || COMMAND
+Created .mot file | 2026-01-10 | demo_writeheader --content demo_appliance --id 1003 --major 1 --minor 2 --revision 1
+Created .mot file | 2026-01-11 | demo_writeheader --content demo_appliance --id 1007 --major 1 --minor 0 --revision 0
+Created .mot file | 2026-01-12 | demo_writeheader --content demo_appliance --id 1001 --major 1 --minor 2 --revision 2

@@ -4,20 +4,20 @@ import subprocess
 import shlex
 
 
-def run_powershell(cmd):
+def run_powershell(cmd: str) -> subprocess.CompletedProcess:
     """
     function to run powershell command
     """
-    completed = subprocess.run(
+    completed: subprocess.CompletedProcess = subprocess.run(
         ["powershell", "-Command", cmd], capture_output=True, shell=True)
     return completed
 
 
-def run_command(command):
+def run_command(command: str) -> None:
     subprocess.call(shlex.split(command))
 
 
-def add_line_to_file(file_name, new_line):
+def add_line_to_file(file_name: str, new_line: str) -> bool:
     """
     Add a line to the specified file with error handling.
 
@@ -42,7 +42,7 @@ def add_line_to_file(file_name, new_line):
         return False
 
 
-def validate_and_get_input(entry, entry_name, min_val=0, max_val=99):
+def validate_and_get_input(entry: ctk.CTkEntry, entry_name: str, min_val: int = 0, max_val: int = 99) -> float | None:
     """
     Validate and return the input from a specific entry field.
 
@@ -53,7 +53,7 @@ def validate_and_get_input(entry, entry_name, min_val=0, max_val=99):
     :return: The validated value or None if invalid.
     """
     try:
-        value = float(entry.get())
+        value: float = float(entry.get())
         if min_val <= value <= max_val:
             return value
         else:

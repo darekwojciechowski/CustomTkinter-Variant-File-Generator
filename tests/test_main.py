@@ -4,21 +4,26 @@ import pytest
 from main import VariantGeneratorDemoApp
 
 # Constants for readability
-DISPLAY_START = "0.0"
-DISPLAY_END = "end"
+DISPLAY_START: str = "0.0"
+DISPLAY_END: str = "end"
 
 
 @pytest.fixture
-def app():
+def app() -> VariantGeneratorDemoApp:
     """Fixture creating an instance of VariantGeneratorDemoApp with a mocked display_box."""
-    app = VariantGeneratorDemoApp()
-    app.display_box = MagicMock()
-    return app
+    with patch.object(VariantGeneratorDemoApp, '__init__', lambda x: None):
+        app: VariantGeneratorDemoApp = VariantGeneratorDemoApp()
+        app.display_box = MagicMock()
+        app.project_dir = os.getcwd()
+        app.default_file_name = "VariantGenerator_Output.mot"
+        app.eep_file_name = None
+        app.generated_mot_path = None
+        return app
 
 
 @patch("os.path.exists", return_value=True)
 @patch("subprocess.run")
-def test_open_folder_highlights_existing_file(mock_subprocess, mock_exists, app):
+def test_open_folder_highlights_existing_file(mock_subprocess: MagicMock, mock_exists: MagicMock, app: VariantGeneratorDemoApp) -> None:
     """
     Checks if open_folder_and_select_file highlights the file when it exists.
 
@@ -34,7 +39,7 @@ def test_open_folder_highlights_existing_file(mock_subprocess, mock_exists, app)
 
 
 @patch("os.path.exists", return_value=False)
-def test_open_folder_shows_error_when_file_missing(mock_exists, app):
+def test_open_folder_shows_error_when_file_missing(mock_exists: MagicMock, app: VariantGeneratorDemoApp) -> None:
     """
     Checks if open_folder_and_select_file displays an error when the file does not exist.
 
@@ -49,7 +54,7 @@ def test_open_folder_shows_error_when_file_missing(mock_exists, app):
     )
 
 
-def test_validate_and_get_input_valid_number(app):
+def test_validate_and_get_input_valid_number(app: VariantGeneratorDemoApp) -> None:
     """
     Checks if validate_and_get_input returns the correct value for a valid number.
 
@@ -58,11 +63,11 @@ def test_validate_and_get_input_valid_number(app):
     """
     app.major_entry = MagicMock()
     app.major_entry.get.return_value = "10"
-    result = app.validate_and_get_input("major")
+    result: float | None = app.validate_and_get_input("major")
     assert result == 10.0
 
 
-def test_validate_and_get_input_invalid_number(app):
+def test_validate_and_get_input_invalid_number(app: VariantGeneratorDemoApp) -> None:
     """
     Checks if validate_and_get_input handles invalid (non-numeric) input.
 
@@ -71,14 +76,14 @@ def test_validate_and_get_input_invalid_number(app):
     """
     app.major_entry = MagicMock()
     app.major_entry.get.return_value = "invalid"
-    result = app.validate_and_get_input("major")
+    result: float | None = app.validate_and_get_input("major")
     assert result is None
     app.display_box.insert.assert_called_with(
         DISPLAY_START, "Error: Major must be a valid number."
     )
 
 
-def test_validate_and_get_input_invalid_extension(app):
+def test_validate_and_get_input_invalid_extension(app: VariantGeneratorDemoApp) -> None:
     """
     Checks if validate_and_get_input handles a string that is not a number (e.g., a filename).
 
@@ -87,7 +92,7 @@ def test_validate_and_get_input_invalid_extension(app):
     """
     app.major_entry = MagicMock()
     app.major_entry.get.return_value = "invalid_file.txt"
-    result = app.validate_and_get_input("major")
+    result: float | None = app.validate_and_get_input("major")
     assert result is None
     app.display_box.insert.assert_called_with(
         DISPLAY_START, "Error: Major must be a valid number."
@@ -96,7 +101,7 @@ def test_validate_and_get_input_invalid_extension(app):
 
 @patch("os.rename")
 @patch("os.path.exists")
-def test_find_and_set_mot_file_success(mock_exists, mock_rename, app):
+def test_find_and_set_mot_file_success(mock_exists: MagicMock, mock_rename: MagicMock, app: VariantGeneratorDemoApp) -> None:
     """
     Checks if find_and_set_mot_file correctly finds and renames the file.
 
@@ -106,13 +111,13 @@ def test_find_and_set_mot_file_success(mock_exists, mock_rename, app):
     """
     app.project_dir = os.path.dirname(os.path.abspath(__file__))
     app.default_file_name = "demo.mot"
-    eep_base_name = "demo_appliance"
+    eep_base_name: str = "demo_appliance"
 
     mock_exists.side_effect = lambda path: path == os.path.join(
         app.project_dir, "demo.mot"
     )
 
-    result = app.find_and_set_mot_file(eep_base_name)
+    result: bool = app.find_and_set_mot_file(eep_base_name)
 
     assert result is True
     mock_rename.assert_called_once_with(
@@ -122,7 +127,7 @@ def test_find_and_set_mot_file_success(mock_exists, mock_rename, app):
 
 
 @patch("os.path.exists", return_value=False)
-def test_find_and_set_mot_file_failure(mock_exists, app):
+def test_find_and_set_mot_file_failure(mock_exists: MagicMock, app: VariantGeneratorDemoApp) -> None:
     """
     Checks if find_and_set_mot_file returns False when the file does not exist.
 
@@ -131,12 +136,12 @@ def test_find_and_set_mot_file_failure(mock_exists, app):
     """
     app.project_dir = "/test"
     app.default_file_name = "default.mot"
-    eep_base_name = "test_file"
-    result = app.find_and_set_mot_file(eep_base_name)
+    eep_base_name: str = "test_file"
+    result: bool = app.find_and_set_mot_file(eep_base_name)
     assert result is False
 
 
-def test_display_error(app):
+def test_display_error(app: VariantGeneratorDemoApp) -> None:
     """
     Checks if display_error correctly displays the error message.
 

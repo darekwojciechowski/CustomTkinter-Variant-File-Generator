@@ -5,7 +5,7 @@ This file contains sample product information for demonstration purposes.
 """
 
 # Mapping of product names to their corresponding IDs - Demo
-id_map = {
+id_map: dict[str, int] = {
     "Smart Thermostat": 1001,
     "Home Security Controller": 1002,
     "Smart Lighting Hub": 1003,
@@ -16,4 +16,4 @@ id_map = {
     "Window Automation Controller": 1008
 }
 
-product_names = list(id_map.keys())  # List of product names
+product_names: list[str] = list(id_map.keys())  # List of product names

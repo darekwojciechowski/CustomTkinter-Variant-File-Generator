@@ -25,7 +25,7 @@ import os
 import random
 
 
-def create_demo_eep_file(filename="demo_appliance.eep", size=4096):
+def create_demo_eep_file(filename: str = "demo_appliance.eep", size: int = 4096) -> str:
     """
     Creates a single demo .eep file with random binary data
 
@@ -37,13 +37,13 @@ def create_demo_eep_file(filename="demo_appliance.eep", size=4096):
         str: Absolute path to the created file
     """
     # Generate random binary data
-    data = bytes([random.randint(0, 255) for _ in range(size)])
+    data: bytes = bytes([random.randint(0, 255) for _ in range(size)])
 
     # Write to file
     with open(filename, 'wb') as f:
         f.write(data)
 
-    file_path = os.path.abspath(filename)
+    file_path: str = os.path.abspath(filename)
     print(f"Created demo .eep file: {file_path}")
     print(f"File size: {size} bytes")
     print(f"This file can be used with the Variant Generator application for testing purposes.")

@@ -22,7 +22,7 @@ pip install poetry
 Navigate to your project directory, which should be the `base location` for your project:
 
 ```bash
-cd Streamlit-Dividend-Dashboard
+cd CustomTkinter-Variant-File-Generator
 ```
 
 Initialize a new Poetry project:
@@ -35,7 +35,7 @@ Follow the prompts to set up your project. You can specify the package name, ver
 
 ## Step 3: Add Dependencies
 
-You can add dependencies to your project using Poetry. For example, to add `pandas`, `scikit-learn` you can run:
+You can add dependencies to your project using Poetry. For example, to add `customtkinter` you can run:
 
 ```bash
 poetry add customtkinter
@@ -46,7 +46,7 @@ poetry add customtkinter
 Poetry automatically creates a virtual environment for your project. To activate it, use:
 
 ```bash
-poetry env activate
+poetry shell
 ```
 
 ## Step 5: Run Your Project
@@ -66,4 +66,4 @@ Here are some other useful Poetry commands:
 - **Add development dependencies**: `poetry add --dev pytest`
 - **List all dependencies**: `poetry show`
 - **Build your package**: `poetry build`
-- **Remove a dependency**: `poetry remove requests`
+- **Remove a dependency**: `poetry remove customtkinter`
