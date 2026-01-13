@@ -6,7 +6,13 @@ import shlex
 
 def run_powershell(cmd: str) -> subprocess.CompletedProcess:
     """
-    function to run powershell command
+    Run a PowerShell command and return the completed process.
+
+    Args:
+        cmd (str): The PowerShell command to execute
+
+    Returns:
+        subprocess.CompletedProcess: The completed process object containing stdout, stderr, and return code
     """
     completed: subprocess.CompletedProcess = subprocess.run(
         ["powershell", "-Command", cmd], capture_output=True, shell=True)
@@ -14,6 +20,12 @@ def run_powershell(cmd: str) -> subprocess.CompletedProcess:
 
 
 def run_command(command: str) -> None:
+    """
+    Execute a shell command.
+
+    Args:
+        command (str): The command string to execute
+    """
     subprocess.call(shlex.split(command))
 
 
@@ -46,11 +58,14 @@ def validate_and_get_input(entry: ctk.CTkEntry, entry_name: str, min_val: int = 
     """
     Validate and return the input from a specific entry field.
 
-    :param entry: The entry widget to validate.
-    :param entry_name: The name of the entry, for error messaging.
-    :param min_val: Minimum allowed value.
-    :param max_val: Maximum allowed value.
-    :return: The validated value or None if invalid.
+    Args:
+        entry (ctk.CTkEntry): The entry widget to validate
+        entry_name (str): The name of the entry, for error messaging
+        min_val (int, optional): Minimum allowed value. Defaults to 0
+        max_val (int, optional): Maximum allowed value. Defaults to 99
+
+    Returns:
+        float | None: The validated value or None if invalid
     """
     try:
         value: float = float(entry.get())
