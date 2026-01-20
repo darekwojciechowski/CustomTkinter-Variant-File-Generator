@@ -1,5 +1,6 @@
 import os
 import subprocess
+import sys
 import traceback
 from datetime import date
 from tkinter import filedialog
@@ -38,7 +39,14 @@ class VariantGeneratorDemoApp(ctk.CTk):
         # Set custom violet theme colors
         self._set_violet_theme()
 
-        self.project_dir: str = os.getcwd()
+        # Get the directory where the script/executable is located
+        # For PyInstaller, use sys._MEIPASS; otherwise use script directory
+        if getattr(sys, 'frozen', False):
+            # Running as compiled executable
+            self.project_dir: str = os.path.dirname(sys.executable)
+        else:
+            # Running as script
+            self.project_dir: str = os.path.dirname(os.path.abspath(__file__))
         self.default_file_name: str = "VariantGenerator_Output.mot"
         self.eep_file_name: str | None = None
         self.generated_mot_path: str | None = None
@@ -161,11 +169,19 @@ class VariantGeneratorDemoApp(ctk.CTk):
                 os.path.basename(self.eep_file_name))[0]
             product_id: int = id_map.get(self.variant_option_menu.get(), 0)
 
+            # Look for batch file in multiple locations
+            # First, check in the same directory as exe/script
             batch_file: str = os.path.join(
-                self.project_dir, "demo", "demo_writeheader.bat")
+                self.project_dir, "demo_writeheader.bat")
+
+            # If not found, check in demo subfolder (for development)
+            if not os.path.exists(batch_file):
+                batch_file = os.path.join(
+                    self.project_dir, "demo", "demo_writeheader.bat")
+
             if not os.path.exists(batch_file):
                 self.display_error(
-                    f"Error: Batch file not found at {batch_file}")
+                    f"Error: Batch file not found. Searched in:\n- {self.project_dir}\n- {os.path.join(self.project_dir, 'demo')}")
                 return
 
             batch_file_name: str = os.path.basename(batch_file)
