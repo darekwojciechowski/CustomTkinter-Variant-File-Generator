@@ -1,6 +1,6 @@
 [project]
 name = "CustomTkinter-Variant-File-Generator"
-version = "0.1.0"
+version = "0.2.0"
 description = "A GUI application using CustomTkinter for generating .MOT files from EEP files."
 authors = []
 license = "MIT"
